@@ -11,6 +11,10 @@ To get started: `node` enviorment should be already setup
 3. Install Node.js and TypeScript.
 4. Compile TypeScript files using `tsc`.
 5. Run the compiled JavaScript files using Node.js.
+    ```
+    npm run-script compile
+    ```
+    This will compile all ts files `notes-fundamental/*` and generate output `output/fundamental.js`
 
 ## Goodbye!
 
