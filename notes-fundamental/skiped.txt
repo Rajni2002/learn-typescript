@@ -1,1 +1,2 @@
 - Classes & Type Guards -> Access Modifiers
+- Type Guards -> Ways for type check
