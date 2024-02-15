@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "outDir": "dist", // Output Directory
+    "target": "ES2016", // target es version
+    "declaration": true,
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "noImplicitOverride": true
+  },
+  "include": ["src", "notes-fundamental"]
+}
