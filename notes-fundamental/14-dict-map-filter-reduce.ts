@@ -73,7 +73,6 @@ function filterDict<T, S>(
   return outputDic;
 }
 // Array.prototype.reduce, but for Dict
-// function reduceDict(...args: any[]): any { }
 function reduceDict<T, S>(
   inputDic: Dict<T>,
   callbackFunction: (curVal: S, item: T) => S,
