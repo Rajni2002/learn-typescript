@@ -4,3 +4,4 @@ package-lock.json
 
 # ignore all transipiled `js` code
 notes-fundamental/*.js
+/*.js

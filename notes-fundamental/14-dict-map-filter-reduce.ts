@@ -43,11 +43,6 @@ interface Dict<T> {
 }
 
 // Array.prototype.map, but for Dict
-// function mapDict(...args: any[]): any {
-//   // args[0] - input dictionary
-//   // args[1] - callback function ()
-
-// }
 function mapDict<T, S>(
   // `T` : input type of Dic, 
   // `S` : output type of Dic,
@@ -62,9 +57,36 @@ function mapDict<T, S>(
   return outputDic;
 }
 // Array.prototype.filter, but for Dict
-function filterDict(...args: any[]): any { }
+// function filterDict(...args: any[]): any { }
+function filterDict<T, S>(
+  inputDic: Dict<T>,
+  callbackFunction: (item: T, key: string) => S
+): Dict<S> {
+  const outputDic: Dict<S> = {};
+  Object.keys(inputDic).forEach((key) => {
+    const currDicValue = inputDic[key];
+    // If the callback for current Object returns true then add the dict to output Dict
+    if (callbackFunction(currDicValue, key)) {
+      outputDic[key] = currDicValue
+    }
+  })
+  return outputDic;
+}
 // Array.prototype.reduce, but for Dict
-function reduceDict(...args: any[]): any { }
+// function reduceDict(...args: any[]): any { }
+function reduceDict<T, S>(
+  inputDic: Dict<T>,
+  callbackFunction: (curVal: S, item: T) => S,
+  intialVal: S
+) {
+  let currValue: S = intialVal;
+  Object.keys(inputDic).forEach((key) => {
+    const currDicValue = inputDic[key];
+    // return the updated value
+    currValue = callbackFunction(currValue, currDicValue)
+  })
+  return currValue;
+}
 
 /////////////////////////////////////////
 ///////////// TEST SUITE ///////////////
@@ -77,6 +99,7 @@ const fruitsWithKgMass = mapDict(fruits, (fruit, name) => ({
   kg: 0.001 * fruit.mass,
   name,
 }))
+console.log("----MAP-------");
 console.log(fruitsWithKgMass);
 const lemonName: string = fruitsWithKgMass.lemon.name
 // @ts-ignore-error
@@ -105,37 +128,41 @@ assertEquals(
 
 // // FILTER
 // // only red fruits
-// const redFruits = filterDict(fruits, (fruit) => fruit.color === 'red')
-// assertOk(redFruits, '[FILTER] filterDict returns something truthy')
-// assertEquals(
-//   Object.keys(redFruits).length,
-//   4,
-//   '[FILTER] 4 fruits that satisfy the filter',
-// )
-// assertEquals(
-//   Object.keys(redFruits).sort().join(', '),
-//   'apple, cherry, grape, raspberry',
-//   '[FILTER] Keys are "apple, cherry, grape, raspberry"',
-// )
+const redFruits = filterDict(fruits, (fruit) => fruit.color === 'red')
+console.log("-----FILTER------");
+console.log(redFruits);
+assertOk(redFruits, '[FILTER] filterDict returns something truthy')
+assertEquals(
+  Object.keys(redFruits).length,
+  4,
+  '[FILTER] 4 fruits that satisfy the filter',
+)
+assertEquals(
+  Object.keys(redFruits).sort().join(', '),
+  'apple, cherry, grape, raspberry',
+  '[FILTER] Keys are "apple, cherry, grape, raspberry"',
+)
 
-// // REDUCE
-// // If we had one of each fruit, how much would the total mass be?
-// const oneOfEachFruitMass = reduceDict(
-//   fruits,
-//   (currentMass, fruit) => currentMass + fruit.mass,
-//   0,
-// )
-// assertOk(redFruits, '[REDUCE] reduceDict returns something truthy')
-// assertEquals(
-//   typeof oneOfEachFruitMass,
-//   'number',
-//   '[REDUCE] reduceDict returns a number',
-// )
-// assertEquals(
-//   oneOfEachFruitMass,
-//   817,
-//   '[REDUCE] 817g mass if we had one of each fruit',
-// )
+// REDUCE
+// If we had one of each fruit, how much would the total mass be?
+const oneOfEachFruitMass = reduceDict(
+  fruits,
+  (currentMass, fruit) => currentMass + fruit.mass,
+  0,
+)
+console.log("-----Reduce------");
+console.log(oneOfEachFruitMass);
+assertOk(redFruits, '[REDUCE] reduceDict returns something truthy')
+assertEquals(
+  typeof oneOfEachFruitMass,
+  'number',
+  '[REDUCE] reduceDict returns a number',
+)
+assertEquals(
+  oneOfEachFruitMass,
+  817,
+  '[REDUCE] 817g mass if we had one of each fruit',
+)
 
 /**/
 export default {}
