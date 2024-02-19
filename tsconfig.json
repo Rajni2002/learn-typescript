@@ -5,7 +5,16 @@
     "declaration": true,
     "module": "CommonJS",
     "moduleResolution": "node",
-    "noImplicitOverride": true
+    "noImplicitOverride": true,
+    "noUnusedParameters": false,
+    "noUnusedLocals": false,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictFunctionTypes": true,
+    "strictNullChecks": true,
+    "checkJs": true,
+    "esModuleInterop": false,
+    "allowSyntheticDefaultImports": false
   },
   "include": ["src", "notes-fundamental"]
 }
