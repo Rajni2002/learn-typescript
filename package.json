@@ -3,10 +3,14 @@
   "version": "1.0.0",
   "description": "My Typescript learning project",
   "main": "index.js",
+  "private": "true",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "compile" : "tsc notes-fundamental/* --outfile output/fundamental.js"
+    "compile": "tsc notes-fundamental/* --outfile output/fundamental.js"
   },
+  "workspaces": [
+    "packages/*"
+  ],
   "keywords": [
     "Rajni2002"
   ],
