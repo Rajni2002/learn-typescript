@@ -1,0 +1,12 @@
+{
+  "name": "chat-stdlib",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "private": "true",
+  "scripts": {
+    "build" : "yarn tsc",
+    "lint": "yarn eslint src --ext js,ts",
+    "test": "yarn jest"
+  }
+}
